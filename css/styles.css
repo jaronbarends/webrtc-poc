@@ -1,0 +1,133 @@
+/*-- Start reset --*/
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; } /* HTML5 display-role reset for older browsers */ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; } ol, ul { list-style: none; } blockquote, q { quotes: none; } blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; } table { border-collapse: collapse; border-spacing: 0; }
+	input {font:inherit;}
+	html {
+		font-size: 62.5%;
+	}
+/*-- Einde reset --*/
+
+body {
+	font-size: 1.6rem;
+	font-family: georgia;
+	line-height: 1.4;
+}
+
+h1 {
+	font-size: 3.2rem;
+}
+
+h2 {
+	font-size: 2.4rem;
+}
+
+.wrapper {
+	margin: 2em;
+}
+
+section {
+	margin: 0 0 1em;
+	border-top: 1px solid #ccc;
+}
+
+/*-- Start general classes --*/
+
+	.cloneSrc {
+		display: none;
+	}
+
+	.disabled {
+		opacity: 0.2;
+	}
+
+/*-- End general classes --*/
+
+
+/*-- Start connections window --*/
+
+	.connectionsWindow {
+		float: right;
+		width: 12em;
+		border: 1px solid #ccc;
+		padding: 0.5em;
+		background: #fff;
+	}
+
+	.close {
+		margin-right: 0.5em;
+	}
+
+/*-- End connections window --*/
+
+
+
+/*-- Start chat --*/
+
+	.chatMsgWindow {
+		margin: 1em 0;
+		padding: 0.5em;
+		width: 30em;
+		background: #f1f1f1;
+	}
+
+	.chatMsgWindow .messageLine {
+		border-top: 1px solid #ccc;
+		padding: 0.5em 0;
+	}
+
+	.chatMsgWindow .messageLine:first-child {
+		border-top: none;
+	}
+
+	.chatMsgWindow .sender {
+		display: block;
+		font-size: 1.2rem;
+	}
+
+/*-- Start chat --*/
+
+
+/*-- Start forms --*/
+
+	.labeledList li {
+		margin: 0.5em 0;
+		padding-left: 12em;
+	}
+
+	.labeledList label {
+		display: inline-block;
+		margin-left: -12em;
+		margin-right: 1em;
+		width: 11em;
+		text-align: right;
+	}
+
+	.explanation {
+		font-size: 1.2rem;
+		color: #999;
+	}
+
+/*-- End forms --*/
+
+
+/*-- Start movable window --*/
+
+	.avatarWindow {
+		position: relative;
+		width: 200px;
+		height: 200px;
+		background: #eee;
+	}
+
+	.avatar {
+		position: absolute;
+		width: 40px;
+		height: 40px;
+	}
+
+	.avatar[id="yourAvatar"] {
+		z-index: 100;
+		border-radius: 5px;
+	}
+
+/*-- End movable window --*/
+

@@ -1,0 +1,109 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="nl" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<title>WebRTC PoC</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+	<div class="wrapper">
+
+		<div id="connectionsWindow" class="connectionsWindow disabled">
+			<h2>Connections</h2>
+			<ul>
+				<li class="cloneSrc connection"><a class="close" href="#" title="close this connection">&times;</a></li>
+			</ul>
+		</div>
+		
+		<section>
+			<form id="youForm">
+				<ul class="formList labeledList">
+					<!--
+					<li>
+						<label for="nickname">Your nickname</label><input id="nickname"></input>
+					</li>
+					-->
+					<li>
+						<label for="yourConnectionId">Jouw id</label><input id="yourConnectionId" readonly></input>
+						<p class="explanation">(Laat deze id door een ander invullen bij "Peer id")</p>
+					</li>
+				</ul>
+			</form>
+		</section>
+
+
+
+		<section>
+			<h2>Maak peer-connectie</h2>
+			<form id="connectionForm" action="#">
+				<ul class="formList labeledList">
+					<li>
+						<label for="peerConnectionId">Peer id</label><input id="peerConnectionId" type="text" value="">
+					</li>
+					<li>
+						<input type="submit" value="Connect!">
+					</li>
+				</ul>
+			</form>
+		</section>
+
+
+		<section id="chatWindow" class="disabled">
+			<h2>Chat</h2>
+			<form id="chatForm">
+				<input id="message" type="text" placeholder="message">
+				<input type="submit" value="Send message">
+			</form>
+
+			<div class="chatMsgWindow">
+
+				<div class="cloneSrc messageLine">
+					<span class="sender"><span class="nickname"></span>:</span>
+					<span class="message"></span>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<h2>Live data</h2>
+			<p>
+				versleep je blokje
+			</p>
+			<div id="avatarWindow" class="avatarWindow">
+				<div class="avatar" id="yourAvatar"></div>
+			</div>
+		</section>
+
+	</div><!-- /.wrapper -->
+
+	<!--[if (gte IE 9)|!(IE)]><!-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<!--<![endif]-->
+    <!--[if lte IE 8 ]>
+	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.3/jquery.min.js"></script>
+    <![endif]-->
+
+	<script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
+	<script src="js/jquery.drags.js"></script>
+	<script src="js/efcs.util.js"></script>
+	<script src="js/webrtcfy.js"></script>
+	<script src="js/connectionsDisplay.js"></script>
+	<script src="js/chat.js"></script>
+	<script src="js/avatar.js"></script>
+
+
+	<script>
+		jQuery(document).ready(function() {
+		});
+	</script>
+</body>
+</html>
