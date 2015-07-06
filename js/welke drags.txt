@@ -1,0 +1,9 @@
+drags-oud: oude, werkende drags zonder touch
+drags__.js: poging tot ombouwen
+
+drags: bevat touch.
+
+todo: in drags-oud zitten nog wat dingen die in drags gestopt moeten worden:
+- cursor
+- wisseling van z-idx.
+even nalopen.

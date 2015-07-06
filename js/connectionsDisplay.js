@@ -8,8 +8,8 @@
 
 
 	//define file-scope variables
-	var fsPeer,// reference to peer object in webrtcfy.js, will be passed in
-		$fsConnectionCloneSrc;
+	var sgPeer,// reference to peer object in webrtcfy.js, will be passed in
+		$sgConnectionCloneSrc;
 
 	var TYPE_FOR_THIS_EXTENSION = 'some representative string here';
 
@@ -30,7 +30,7 @@
 				conn = $conn.data('connection');
 
 			var eventName = 'close';
-			fsPeer.triggerEvent('closeConnection', conn);
+			sgPeer.triggerEvent('closeConnection', conn);
 		};
 
 
@@ -57,10 +57,10 @@
 		* @returns {undefined}
 		*/
 		var displayConnection = function(conn) {
-			var $conn = Efcs.util.getClone($fsConnectionCloneSrc);
+			var $conn = Efcs.util.getClone($sgConnectionCloneSrc);
 				
 			$conn.html($conn.html()+conn.peer)
-					.insertBefore($fsConnectionCloneSrc);
+					.insertBefore($sgConnectionCloneSrc);
 
 			//store a reference to the connection object in the connection li element
 			$conn.data('connection', conn);
@@ -79,7 +79,7 @@
 			if ($connectionsWindow.hasClass('disabled')) {
 
 				$connectionsWindow.removeClass('disabled');
-				$fsConnectionCloneSrc = $connectionsWindow.find('.cloneSrc');
+				$sgConnectionCloneSrc = $connectionsWindow.find('.cloneSrc');
 				$connectionsWindow.on('click', '.close', closeConnectionHandler);
 
 			}
@@ -97,7 +97,7 @@
 			var data = {
 			};
 
-			fsPeer.sendData(data, conn);
+			sgPeer.sendData(data, conn);
 		};
 
 
@@ -128,6 +128,7 @@
 		* @returns {undefined}
 		*/
 		var connectionClosedHandler = function(conn) {
+			removeDisplayedConnection(conn);
 		};
 
 
@@ -161,7 +162,7 @@
 		* @returns {undefined}
 		*/
 		var peerreadyHandler = function(e, data) {
-			fsPeer = data.peer;
+			sgPeer = data.peer;
 		};
 
 

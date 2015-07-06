@@ -8,7 +8,7 @@
 
 
 	//define file-scope variables
-	var fsPeer;// reference to peer object in webrtcfy.js, will be passed in
+	var sgPeer;// reference to peer object in webrtcfy.js, will be passed in
 
 	var TYPE_FOR_THIS_EXTENSION = 'some representative string here';
 
@@ -25,7 +25,7 @@
 			var data = {
 			};
 
-			fsPeer.sendData(data, conn);
+			sgPeer.sendData(data, conn);
 		};
 
 
@@ -87,7 +87,7 @@
 		* @returns {undefined}
 		*/
 		var peerreadyHandler = function(e, data) {
-			fsPeer = data.peer;
+			sgPeer = data.peer;
 		};
 
 

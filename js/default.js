@@ -1,15 +1,15 @@
 ;(function($) {
 
 	//define file-scope variables
-	var fsPeerJSApiKey = 'a7f838qn54eljtt9',
-		fsPeer,
-		fsPeerId,//will contain this user's peer id
-		fsConns = [],//array containing all connections
-		$fsChatWindow,
-		$fsChatMessageCloneSrc,
-		$fsConnectionCloneSrc,
-		$fsAvatarWindow,
-		$fsAvatar;
+	var sgPeerJSApiKey = 'a7f838qn54eljtt9',
+		sgPeer,
+		sgPeerId,//will contain this user's peer id
+		sgConns = [],//array containing all connections
+		$sgChatWindow,
+		$sgChatMessageCloneSrc,
+		$sgConnectionCloneSrc,
+		$sgAvatarWindow,
+		$sgAvatar;
 
 	var TYPE_MESSAGE = 'message',
 		TYPE_AVATAR_INIT = 'avatar init'
@@ -26,15 +26,15 @@
 		* @returns {undefined}
 		*/
 		var initPeer = function() {
-			fsPeer = new Peer({key: fsPeerJSApiKey});
+			sgPeer = new Peer({key: sgPeerJSApiKey});
 
-			fsPeer.on('open', function(id) {
-				fsPeerId = id;
+			sgPeer.on('open', function(id) {
+				sgPeerId = id;
 				$('#yourConnectionId').val(id);
 			});
 
 			//handle incomming connections
-			fsPeer.on('connection', checkConnection);
+			sgPeer.on('connection', checkConnection);
 
 		};
 
@@ -74,8 +74,8 @@
 			if (conn) {
 				conn.send(data);
 			} else {
-				for (var i=0, len = fsConns.length; i<len; i++) {
-					conn = fsConns[i];
+				for (var i=0, len = sgConns.length; i<len; i++) {
+					conn = sgConns[i];
 					conn.send(data);
 				}
 			}
@@ -99,7 +99,7 @@
 		* @returns {undefined}
 		*/
 		var initConnection = function(conn) {
-			fsConns.push(conn);
+			sgConns.push(conn);
 
 			//IN A PRODUCTION APP, YOU'LL WANT TO SEND A NEW CONNECTION EVENT HERE
 			displayConnection(conn);
@@ -158,7 +158,7 @@
 					users: [uObject]
 				}
 			};
-			var conn = fsPeer.connect(peerId, options);//returns DataConnection object
+			var conn = sgPeer.connect(peerId, options);//returns DataConnection object
 			checkConnection(conn);
 		};
 
@@ -219,10 +219,10 @@
 		* @returns {undefined}
 		*/
 		var displayConnection = function(conn) {
-			var $conn = getClone($fsConnectionCloneSrc);
+			var $conn = getClone($sgConnectionCloneSrc);
 				
 			$conn.html($conn.html()+conn.peer)
-					.insertBefore($fsConnectionCloneSrc);
+					.insertBefore($sgConnectionCloneSrc);
 
 			//store a reference to the connection object in the connection li element
 			$conn.data('connection', conn);
@@ -239,7 +239,7 @@
 		var initConnectionsWindow = function() {
 			var $connectionsWindow = $('#connectionsWindow');
 
-			$fsConnectionCloneSrc = $connectionsWindow.find('.cloneSrc');
+			$sgConnectionCloneSrc = $connectionsWindow.find('.cloneSrc');
 
 			$connectionsWindow.on('click', '.close', closeConnectionHandler)
 		};
@@ -260,7 +260,7 @@
 		*/
 		var displayChatMessage = function(sender, msg) {
 			
-			var $msg = getClone($fsChatMessageCloneSrc);
+			var $msg = getClone($sgChatMessageCloneSrc);
 
 			$msg.find('.sender .nickname')
 				.text(sender)
@@ -268,7 +268,7 @@
 				.find('.message')
 				.text(msg);
 
-			$fsChatMessageCloneSrc.before($msg);
+			$sgChatMessageCloneSrc.before($msg);
 		};
 
 
@@ -309,8 +309,8 @@
 		* @returns {undefined}
 		*/
 		var initChatWindow = function() {
-			$fsChatWindow = $('#chatWindow');
-			$fsChatMessageCloneSrc = $fsChatWindow.find('.cloneSrc.messageLine');
+			$sgChatWindow = $('#chatWindow');
+			$sgChatMessageCloneSrc = $sgChatWindow.find('.cloneSrc.messageLine');
 		};
 
 
@@ -327,7 +327,7 @@
 		* @returns {undefined}
 		*/
 		var addAvatar = function(data, conn) {
-			var $avatar = getClone($fsAvatar).removeAttr('id');
+			var $avatar = getClone($sgAvatar).removeAttr('id');
 
 			var css = {
 				left: data.left,
@@ -337,7 +337,7 @@
 
 			$avatar.css(css)
 				.attr('data-connection-id', conn.peer)
-				.appendTo($fsAvatarWindow)
+				.appendTo($sgAvatarWindow)
 				.hide()
 				.fadeIn();
 		};
@@ -350,7 +350,7 @@
 		*/
 		var removeAvatar = function(conn) {
 			var connId = conn.peer;
-			var $avatar = $fsAvatarWindow.find('[data-connection-id="'+connId+'"]');
+			var $avatar = $sgAvatarWindow.find('[data-connection-id="'+connId+'"]');
 			if ($avatar.length) {
 				$avatar.fadeOut($avatar.remove);
 			}
@@ -364,7 +364,7 @@
 		*/
 		var moveAvatar = function(data, conn) {
 			var connectionId = conn.peer
-			var $avatar = $fsAvatarWindow.find('[data-connection-id="'+connectionId+'"]');
+			var $avatar = $sgAvatarWindow.find('[data-connection-id="'+connectionId+'"]');
 
 			var css = {
 				left: data.left,
@@ -382,9 +382,9 @@
 		*/
 		var getAvatarData = function() {
 			var avatarData = {
-				top: $fsAvatar.css('top'),
-				left: $fsAvatar.css('left'),
-				backgroundColor: $fsAvatar.css('backgroundColor')
+				top: $sgAvatar.css('top'),
+				left: $sgAvatar.css('left'),
+				backgroundColor: $sgAvatar.css('backgroundColor')
 			};
 			return avatarData;
 		};
@@ -398,9 +398,9 @@
 		var sendAvatarData = function(conn) {
 			var data = {
 				type: TYPE_AVATAR_INIT,
-				top: $fsAvatar.css('top'),
-				left: $fsAvatar.css('left'),
-				backgroundColor: $fsAvatar.css('backgroundColor')
+				top: $sgAvatar.css('top'),
+				left: $sgAvatar.css('left'),
+				backgroundColor: $sgAvatar.css('backgroundColor')
 			};
 			sendData(data, conn);
 		};
@@ -430,11 +430,11 @@
 		* @returns {undefined}
 		*/
 		var initAvatarWindow = function() {
-			$fsAvatarWindow = $('#avatarWindow');
-			$fsAvatar = $('#yourAvatar');
+			$sgAvatarWindow = $('#avatarWindow');
+			$sgAvatar = $('#yourAvatar');
 
-			var left = Math.floor( ($fsAvatarWindow.width() - $fsAvatar.width())*Math.random() ),
-				top = Math.floor( ($fsAvatarWindow.height() - $fsAvatar.height())*Math.random() );
+			var left = Math.floor( ($sgAvatarWindow.width() - $sgAvatar.width())*Math.random() ),
+				top = Math.floor( ($sgAvatarWindow.height() - $sgAvatar.height())*Math.random() );
 
 			var r = Math.floor(16*Math.random()).toString(16),
 				g = Math.floor(16*Math.random()).toString(16),
@@ -447,7 +447,7 @@
 				backgroundColor: color
 			};
 
-			$fsAvatar.drags().css(css).data('color', color);
+			$sgAvatar.drags().css(css).data('color', color);
 
 			$(document).on('move.drags', moveAvatarHandler);
 		};
@@ -484,7 +484,7 @@
 		*/
 		var getUserObject = function() {
 			var uObject = {
-				peer: fsPeerId,
+				peer: sgPeerId,
 				name: $('#nickname').val()
 			};
 

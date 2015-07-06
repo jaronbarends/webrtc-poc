@@ -9,9 +9,9 @@
 
 
 	//define file-scope variables
-	var fsPeer,// reference to peer object in webrtcfy.js, will be passed in
-		$fsAvatarWindow,
-		$fsAvatar;
+	var sgPeer,// reference to peer object in webrtcfy.js, will be passed in
+		$sgAvatarWindow,
+		$sgAvatar;
 
 	var TYPE_AVATAR_INIT = 'avatar init'
 		TYPE_AVATAR_MOVE = 'avatar';
@@ -26,7 +26,7 @@
 		* @returns {undefined}
 		*/
 		var addAvatar = function(data, conn) {
-			var $avatar = Efcs.util.getClone($fsAvatar).removeAttr('id');
+			var $avatar = Efcs.util.getClone($sgAvatar).removeAttr('id');
 
 			var css = {
 				left: data.left,
@@ -36,7 +36,7 @@
 
 			$avatar.css(css)
 				.attr('data-connection-id', conn.peer)
-				.appendTo($fsAvatarWindow)
+				.appendTo($sgAvatarWindow)
 				.hide()
 				.fadeIn();
 		};
@@ -49,7 +49,7 @@
 		*/
 		var removeAvatar = function(conn) {
 			var connId = conn.peer;
-			var $avatar = $fsAvatarWindow.find('[data-connection-id="'+connId+'"]');
+			var $avatar = $sgAvatarWindow.find('[data-connection-id="'+connId+'"]');
 			if ($avatar.length) {
 				$avatar.fadeOut($avatar.remove);
 			}
@@ -63,7 +63,7 @@
 		*/
 		var moveAvatar = function(data, conn) {
 			var connectionId = conn.peer
-			var $avatar = $fsAvatarWindow.find('[data-connection-id="'+connectionId+'"]');
+			var $avatar = $sgAvatarWindow.find('[data-connection-id="'+connectionId+'"]');
 
 			var css = {
 				left: data.left,
@@ -81,9 +81,9 @@
 		*/
 		var getAvatarData = function() {
 			var avatarData = {
-				top: $fsAvatar.css('top'),
-				left: $fsAvatar.css('left'),
-				backgroundColor: $fsAvatar.css('backgroundColor')
+				top: $sgAvatar.css('top'),
+				left: $sgAvatar.css('left'),
+				backgroundColor: $sgAvatar.css('backgroundColor')
 			};
 			return avatarData;
 		};
@@ -97,12 +97,12 @@
 		var sendAvatarInitData = function(conn) {
 			var data = {
 				type: TYPE_AVATAR_INIT,
-				top: $fsAvatar.css('top'),
-				left: $fsAvatar.css('left'),
-				backgroundColor: $fsAvatar.css('backgroundColor')
+				top: $sgAvatar.css('top'),
+				left: $sgAvatar.css('left'),
+				backgroundColor: $sgAvatar.css('backgroundColor')
 			};
 
-			fsPeer.sendData(data, conn);
+			sgPeer.sendData(data, conn);
 		};
 
 
@@ -120,7 +120,7 @@
 				color: data.color
 			};
 
-			fsPeer.sendData(avData);
+			sgPeer.sendData(avData);
 		};
 
 
@@ -130,11 +130,11 @@
 		* @returns {undefined}
 		*/
 		var initAvatarWindow = function() {
-			$fsAvatarWindow = $('#avatarWindow');
-			$fsAvatar = $('#yourAvatar');
+			$sgAvatarWindow = $('#avatarWindow');
+			$sgAvatar = $('#yourAvatar');
 
-			var left = Math.floor( ($fsAvatarWindow.width() - $fsAvatar.width())*Math.random() ),
-				top = Math.floor( ($fsAvatarWindow.height() - $fsAvatar.height())*Math.random() );
+			var left = Math.floor( ($sgAvatarWindow.width() - $sgAvatar.width())*Math.random() ),
+				top = Math.floor( ($sgAvatarWindow.height() - $sgAvatar.height())*Math.random() );
 
 			var r = Math.floor(16*Math.random()).toString(16),
 				g = Math.floor(16*Math.random()).toString(16),
@@ -147,7 +147,7 @@
 				backgroundColor: color
 			};
 
-			$fsAvatar.drags().css(css).data('color', color);
+			$sgAvatar.drags().css(css).data('color', color);
 
 			$(document).on('move.drags', moveAvatarHandler);
 		};
@@ -214,7 +214,7 @@
 		* @returns {undefined}
 		*/
 		var peerreadyHandler = function(e, data) {
-			fsPeer = data.peer;
+			sgPeer = data.peer;
 		};
 
 
