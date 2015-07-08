@@ -3,18 +3,23 @@
 * webrtc avatar display
 * @requires efcs.util.js
 * @requires wbrtcfy.js
+* @requires jquery.drags.js
 */
 
 ;(function($) {
 
+	'use strict';
 
 	//define file-scope variables
 	var sgPeer,// reference to peer object in webrtcfy.js, will be passed in
 		$sgAvatarWindow,
 		$sgAvatar;
 
-	var TYPE_AVATAR_INIT = 'avatar init'
-		TYPE_AVATAR_MOVE = 'avatar';
+	//define data types this add-on can send and/or receive
+	var dataTypes = {
+		avatarInit: 'avatar init',
+		avatarMove: 'avatar'
+	};
 
 
 	/*-- Start avatar functions --*/
@@ -96,7 +101,7 @@
 		*/
 		var sendAvatarInitData = function(conn) {
 			var data = {
-				type: TYPE_AVATAR_INIT,
+				type: dataTypes.avatarInit,
 				top: $sgAvatar.css('top'),
 				left: $sgAvatar.css('left'),
 				backgroundColor: $sgAvatar.css('backgroundColor')
@@ -114,7 +119,7 @@
 		var moveAvatarHandler = function(e, data) {
 			var color = $(data.targetElm).data('color');
 			var avData = {
-				type: TYPE_AVATAR_MOVE,
+				type: dataTypes.avatarMove,
 				left: data.left,
 				top: data.top,
 				color: data.color
@@ -168,10 +173,10 @@
 			var type = data.type;
 
 			switch(type) {
-				case TYPE_AVATAR_INIT:
+				case dataTypes.avatarInit:
 					addAvatar(data, conn);
 					break;
-				case TYPE_AVATAR_MOVE:
+				case dataTypes.avatarMove:
 					moveAvatar(data, conn);
 					break;
 			}

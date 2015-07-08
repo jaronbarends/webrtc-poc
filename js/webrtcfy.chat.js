@@ -13,7 +13,10 @@
 		$fsChatWindow,
 		$fsChatMessageCloneSrc;
 
-	var TYPE_MESSAGE = 'message';
+	//define data types this add-on can send and/or receive
+	var dataTypes = {
+		message: 'message'
+	}
 
 
 	/*-- Start chat functions --*/
@@ -47,7 +50,7 @@
 		*/
 		var sendMessage = function(msg, conn) {
 			var data = {
-				type: TYPE_MESSAGE,
+				type: dataTypes.message,
 				message: msg
 			};
 
@@ -87,7 +90,7 @@
 		*/
 		var dataHandler = function(data, conn) {
 			var type = data.type;
-			if (type === TYPE_MESSAGE) {
+			if (type === dataTypes.message) {
 				var sender = conn.peer;
 				displayChatMessage(sender, data.message);
 			}

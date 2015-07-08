@@ -1,23 +1,28 @@
 /*
-* webcrtfy-extension.js
-* basic code for creating extension to work with webrtcfy.js
+* webcrtfy-addon.js
+* basic code for creating an add-on to work with webrtcfy.js
 * @requires wbrtcfy.js
 */
 
 ;(function($) {
 
+	'use strict';
+
 
 	//define file-scope variables
 	var sgPeer;// reference to peer object in webrtcfy.js, will be passed in
 
-	var TYPE_FOR_THIS_EXTENSION = 'some representative string here';
+	//define data types this add-on can send and/or receive
+	var dataTypes = {
+		TYPE_FOR_THIS_EXTENSION: 'some representative string here'
+	}
 
 
-	/*-- Start extension functions --*/
+	/*-- Start add-on functions --*/
 
 
 		/**
-		* send data to a specific connection
+		* send data to a specific connection through the peer-object
 		* @param {DataConnection} conn [optional] Data connection to send data to
 		* @returns {undefined}
 		*/
@@ -29,7 +34,7 @@
 		};
 
 
-	/*-- End extension functions --*/
+	/*-- End add-on functions --*/
 
 
 	/*-- Start peer functions --*/
@@ -44,7 +49,7 @@
 			var type = data.type;
 
 			switch(type) {
-				case TYPE_FOR_THIS_EXTENSION:
+				case dataTypes.TYPE_FOR_THIS_EXTENSION:
 					console.log('data received:', data, conn);
 					break;
 			}

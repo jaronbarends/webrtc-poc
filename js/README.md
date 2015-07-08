@@ -36,4 +36,19 @@ __data-object properties:__
 
 ##Events the script listens for
 
-The script itself also listens for events sent by extensions.
+The script itself also listens for events sent by add-ons.
+
+###close.webrtcfy
+
+expected data:  the peerjs connection-object to close
+
+##peerWrapper-object methods
+
+The sgPeerWrapper object that gets passed around has the following methods that can be called by add-ons:
+
+###sendData
+
+Can be used to send data to all or one specific connection
+
+`sendData(data, conn)`
+

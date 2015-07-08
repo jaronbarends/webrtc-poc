@@ -26,23 +26,25 @@
             /*-- End added jaron: keep track of latest x and y pos relative to parent --*/
  
             if(opt.handle === "") {
-                var $drag = $(this).addClass('draggable');
+                var $draggable = $(this).addClass('draggable');
             } else {
-                var $drag = $(this).addClass('active-handle').parent().addClass('draggable');
+                var $draggable = $(this).addClass('active-handle').parent().addClass('draggable');
             }
  
-            var z_idx = $drag.css('z-index'),
-                drg_h = $drag.outerHeight(),
-                drg_w = $drag.outerWidth(),
-                pos_y = $drag.offset().top + drg_h - e.pageY || $drag.offset().top + drg_h - e.originalEvent.pageY,
-                pos_x = $drag.offset().left + drg_w - e.pageX || $drag.offset().left + drg_w - e.originalEvent.pageX,
-                $parent = $drag.parent(),
+            var z_idx = $draggable.css('z-index'),
+                drg_h = $draggable.outerHeight(),
+                drg_w = $draggable.outerWidth(),
+                pos_y = $draggable.offset().top + drg_h - e.pageY || $draggable.offset().top + drg_h - e.originalEvent.pageY,
+                pos_x = $draggable.offset().left + drg_w - e.pageX || $draggable.offset().left + drg_w - e.originalEvent.pageX,
+                $parent = $draggable.parent(),
                 parent_y = $parent.offset().top,
                 parent_x = $parent.offset().left;
  
-            $drag.css('z-index', z_idx)
+            $draggable.css('z-index', z_idx)
                 .parents()
                 .on("mousemove touchmove", function(e) {
+
+                    e.preventDefault();//otherwise touchmove is only fired once on chrome
 
                     var top = e.pageY  + pos_y - drg_h || e.originalEvent.pageY + pos_y - drg_h,
                         left = e.pageX + pos_x - drg_w || e.originalEvent.pageX + pos_x - drg_w;

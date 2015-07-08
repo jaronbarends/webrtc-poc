@@ -1,17 +1,21 @@
 /*
-* connectionDisplay.js
+* webrtcfy.connectionDisplay.js
 * display connections with webrtcfy.js
 * @requires wbrtcfy.js
 */
 
 ;(function($) {
 
+	'use strict';
 
 	//define file-scope variables
 	var sgPeer,// reference to peer object in webrtcfy.js, will be passed in
 		$sgConnectionCloneSrc;
 
-	var TYPE_FOR_THIS_EXTENSION = 'some representative string here';
+	//define data types this add-on can send and/or receive
+	var dataTypes = {
+		TYPE_FOR_THIS_EXTENSION: 'some representative string here'
+	}
 
 
 	/*-- Start connections window functions --*/
@@ -116,7 +120,7 @@
 			var type = data.type;
 
 			switch(type) {
-				case TYPE_FOR_THIS_EXTENSION:
+				case dataTypes.TYPE_FOR_THIS_EXTENSION:
 					break;
 			}
 		};

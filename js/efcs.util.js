@@ -5,8 +5,6 @@
 ;(function($) {
 
 
-
-
 	/**
 	* get an element from a cloneSrc
 	* @param {string of jQuery object} selector The selector for the cloneSrc, or the sloneSrc element itself
